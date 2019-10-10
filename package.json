@@ -1,5 +1,5 @@
 {
-  "name": "@DavAlbert/lovoo-js",
+  "name": "lovoo-js",
   "version": "1.0.0",
   "description": "client for lovoo (not official)",
   "main": "lovoo.js",
