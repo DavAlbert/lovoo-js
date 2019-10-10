@@ -1,5 +1,5 @@
 {
-  "name": "lovoojs",
+  "name": "@DavAlbert/lovoo-js",
   "version": "1.0.0",
   "description": "client for lovoo (not official)",
   "main": "lovoo.js",
@@ -13,5 +13,8 @@
   "license": "ISC",
   "dependencies": {
     "request": "^2.88.0"
+  },
+  "repository": {
+    "url": "git://github.com/DavAlbert/lovoo-js.git"
   }
 }
