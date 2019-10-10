@@ -1,0 +1,17 @@
+{
+  "name": "lovoojs",
+  "version": "1.0.0",
+  "description": "client for lovoo (not official)",
+  "main": "lovoo.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "lovoo"
+  ],
+  "author": "David Albert alias Garkolym",
+  "license": "ISC",
+  "dependencies": {
+    "request": "^2.88.0"
+  }
+}
