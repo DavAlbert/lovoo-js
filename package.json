@@ -1,6 +1,6 @@
 {
   "name": "lovoo-js",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "client for lovoo (not official)",
   "main": "lovoo.js",
   "scripts": {
