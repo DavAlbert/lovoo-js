@@ -3,10 +3,12 @@
 Das ist ein nicht offizielles NodeJS Package, welches zum Spass erstellt wurde, um ein paar Sachen auszuprobieren.
 
 [Hier befindet sich der Release der NPM Package](https://www.npmjs.com/package/lovoo-js)
+[Hier befindet sich das Git Repository](https://github.com/DavAlbert/lovoo-js)
+
 
 ## Installation
 ```
-$ npm install lovoo-js
+$ npm install lovoo-js --save
 ```
 
 ## Einführung
