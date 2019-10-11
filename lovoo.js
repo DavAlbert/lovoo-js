@@ -4,8 +4,8 @@ function LovooClient() {
     const host = 'https://www.lovoo.com';
     const api = 'https://www.lovoo.com/api_web.php';
 
-    var lovooKey = null;
-    var lovooCsrf = null;
+    let lovooKey = null;
+    let lovooCsrf = null;
 
     const loggedUser = {
         id: null,
@@ -87,7 +87,7 @@ function LovooClient() {
                 try {
                     const responseImages = JSON.parse(body).response.result[0].images;
                     resolve(responseImages);
-                } catch(e) {
+                } catch (e) {
                     reject(e);
                 }
             });
@@ -103,7 +103,7 @@ function LovooClient() {
                 try {
                     const responseDetails = JSON.parse(body).response.result.me;
                     resolve(responseDetails);
-                } catch(e) {
+                } catch (e) {
                     reject(e);
                 }
             });
@@ -122,7 +122,7 @@ function LovooClient() {
                 };
                 resolve(result);
             });
-        }); 
+        });
     }
 
     this.getAllConversations = function() {
@@ -133,9 +133,9 @@ function LovooClient() {
                 }
                 try {
                     const responseConversations = JSON.parse(body).response.result;
-                    var betterResponse = [];
+                    let betterResponse = [];
 
-                    for (var i = 0; i < responseConversations.length; i++) {
+                    for (let i = 0; i < responseConversations.length; i++) {
                         betterResponse.push({
                             id: responseConversations[i].id,
                             countNewMessages: responseConversations[i].countNewMessages,
@@ -145,7 +145,7 @@ function LovooClient() {
                     }
 
                     resolve(betterResponse);
-                } catch(e) {
+                } catch (e) {
                     reject(e);
                 }
             });
@@ -165,15 +165,15 @@ function LovooClient() {
                         name: JSON.parse(body).response.conversation.user.name
                     };
                     const messages = [];
-                    for (var i = 0; i < responseConversation.length; i++) {
+                    for (let i = 0; i < responseConversation.length; i++) {
                         messages.push({
-                            date: new Date(responseConversation[i].time*1000),
+                            date: new Date(responseConversation[i].time * 1000),
                             message: responseConversation[i].content,
                             sender: responseConversation[i].direction == 2 ? { id: loggedUser['id'], name: loggedUser['name'] } : partner
                         });
                     }
                     resolve(messages);
-                } catch(e) {
+                } catch (e) {
                     reject(e);
                 }
             });
@@ -189,22 +189,22 @@ function LovooClient() {
             lovooKey = null;
             lovooCsrf = null;
             request.post(host + paths['host']['login']).form({ _username: email, _password: password, _remember_me: 'false' })
-            .on('response', (response) => {
-                let headers = response.headers['set-cookie'];
-                for (var i = 0; i < headers.length; i++) {
-                    if (headers[i].includes('lovoo=')) {
-                        lovooKey = headers[i].split('lovoo=')[1].split(';')[0];
-                    } else if (headers[i].includes('lovoocsrf=')) {
-                        lovooCsrf = headers[i].split('lovoocsrf=')[i].split(';')[0];
+                .on('response', (response) => {
+                    let headers = response.headers['set-cookie'];
+                    for (var i = 0; i < headers.length; i++) {
+                        if (headers[i].includes('lovoo=')) {
+                            lovooKey = headers[i].split('lovoo=')[1].split(';')[0];
+                        } else if (headers[i].includes('lovoocsrf=')) {
+                            lovooCsrf = headers[i].split('lovoocsrf=')[i].split(';')[0];
+                        }
                     }
-                }
-                if (lovooKey != null && lovooCsrf != null) {
-                    getSelf().then((r) => resolve(r)).catch((e) => reject(e));
-                } else {
-                    reject({error: 'wrong credentials'});
-                }
-            })
-            .on('error', (error) => reject(error));
+                    if (lovooKey != null && lovooCsrf != null) {
+                        getSelf().then((r) => resolve(r)).catch((e) => reject(e));
+                    } else {
+                        reject({ error: 'wrong credentials' });
+                    }
+                })
+                .on('error', (error) => reject(error));
         });
     };
 
